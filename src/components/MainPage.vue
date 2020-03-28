@@ -1,20 +1,17 @@
 <template lang="pug">
-  main-pag
+  .div 123
+  
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component ({})
-
-export defualt class index extends Vue {
+export defualt class MainPage extends Vue {
 
 }
 
 </script>
 
 <style lang="sass" scoped>
-
-body
-  margin: 0
 
 </style>

@@ -18,9 +18,6 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ]
   },
-  plugins: [
-    { src: '~plugins/vue-particles', ssr: false },
-    ],
   modules: [
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
