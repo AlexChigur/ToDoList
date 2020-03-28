@@ -1,5 +1,4 @@
 <template lang="pug">
-  main-pag
 </template>
 
 <script lang="ts">
