@@ -1,0 +1,169 @@
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-touch-callout: none;
+  -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/**
+ * Mixin scrollbar
+ */
+@mixin scrollbar($size, $primary, $secondary: lighten($primary, 25%)) {
+  ::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $secondary;
+  }
+}
+
+@mixin fade ($speed: .25s) {
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity $speed
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0
+  }
+}
+
+@mixin transition($prop: all, $speed: .2s, $ease: ease-in-out) {
+  transition: $prop $speed $ease;
+}
+
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin link-behavior {
+  cursor: pointer;
+  color: $accent-color;
+  @include transition($speed: 0.1s);
+  &:hover {
+    color: $link-hover;
+  }
+  &:active {
+    color: $link-active;
+  }
+}
+
+@mixin link-decorated {
+  @include link-behavior();
+  padding: 0;
+  border-bottom: 1px dashed $accent-color;
+}
+
+
+
+@mixin label ($color: #788490, $active-color: $accent-color) {
+  color: $color;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.67;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  @include transition($speed: .15s);
+
+  &.active {
+    color: $active-color;
+  }
+}
+
+@mixin textarea () {
+  border: 2px solid transparent;
+  border-radius: 1px;
+  resize: none;
+  outline: none;
+  background: $background-grey;
+  caret-color: $accent-color;
+  padding: 8px 12px;
+  &:focus {
+    border-color: $accent-color;
+    background: white
+  }
+}
+
+
+@mixin transparent-input {
+  .transparent-input {
+    border: none;
+    caret-color: $accent-color;
+    color: $body-color;
+    &.title {
+      font-size: 20px;
+      font-family: $headings-font-family;
+      font-weight: 900;
+    }
+    &::placeholder {
+      color: #e0e7ed;
+    }
+  }
+}
+@mixin heading($font-size: 24px) {
+  font-family: $headings-font-family;
+  font-size: $font-size;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: condensed;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: $body-color;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin h1Title() {
+  @include heading(40px);
+  @include media-breakpoint-down(md) {
+    font-size: 32px
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 24px
+  }
+}
+
+@mixin title ($font-size: 40px) {
+  font-family: $headings-font-family;
+  font-size: $font-size;
+  font-weight: 900;
+}

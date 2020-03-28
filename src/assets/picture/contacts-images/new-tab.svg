@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 54.1 (76490) - https://sketchapp.com -->
+    <title>F0B0398A-A454-4C03-994B-A7D9696481F2</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M28.9644858,12 L28.9644858,18 L27.9644858,18 L27.9644858,13 L22.9644858,13 L22.9644858,12 L28.9644858,12 Z M22.1918828,17.8455309 L16.6053223,18.3915341 L16.3356924,17.4285701 L24.4469938,16.2975267 L23.3159504,24.4088281 L22.3529864,24.1391982 L22.8989896,18.5526377 L13.7071068,27.7445205 L13,27.0374137 L22.1918828,17.8455309 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="new-tab">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="colors-/-primary" mask="url(#mask-2)" fill="#009FC1" fill-rule="nonzero">
+                <g transform="translate(-2.000000, -2.000000)" id="Rectangle">
+                    <rect x="0" y="0" width="52" height="52"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

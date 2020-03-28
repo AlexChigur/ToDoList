@@ -1,0 +1,22 @@
+.g-container
+  width: 100%
+  max-width: 896px
+  margin: 0 auto
+  @include media-breakpoint-down(lg)
+    max-width: 896px
+  @include media-breakpoint-down(md)
+    max-width: 720px
+  @include media-breakpoint-down(sm)
+    max-width: 100%
+    padding: 0 24px
+
+.g-sm-container
+  max-width: 930px
+  @extend .g-container
+  @include media-breakpoint-down(lg)
+    max-width: 720px
+  @include media-breakpoint-down(md)
+    max-width: 672px
+  @include media-breakpoint-down(sm)
+    max-width: 100%
+    padding: 0 16px

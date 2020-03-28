@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 54.1 (76490) - https://sketchapp.com -->
+    <title>0C6D71FA-6E9F-4EE2-9F46-EC4D028385A0</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="25.4357878 37.9992853 29 33.662908 29.8715755 34.1531692 24.9357878 40.6884938 20 34.1531692 20.8715755 33.662908 24.4357878 37.9992853 24.4357878 31.9080386 24.4357878 7 25.4357878 7 25.4357878 31.9080386"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="scroll-down">
+            <rect id="Rectangle" fill-rule="nonzero" x="0" y="0.378446644" width="48" height="48"></rect>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="scroll" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="colors-/-primary" mask="url(#mask-2)" fill="#009FC1" fill-rule="nonzero">
+                <g transform="translate(-2.000000, -2.000000)" id="Rectangle">
+                    <rect x="0" y="0" width="52" height="52"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

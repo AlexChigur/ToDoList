@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 54.1 (76490) - https://sketchapp.com -->
+    <title>292BC1E8-44EA-4FDE-A733-D4635C9AA6E7</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="-23.4729795%" y1="-62.1423261%" x2="87.796023%" y2="87.6386303%" id="linearGradient-1">
+            <stop stop-color="#383C3D" offset="0%"></stop>
+            <stop stop-color="#009FC1" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-2" cx="4" cy="4" r="4"></circle>
+        <filter x="-150.0%" y="-150.0%" width="400.0%" height="400.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.623529412   0 0 0 0 0.756862745  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Obvious" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main" transform="translate(-184.000000, -1708.000000)" fill-rule="nonzero">
+            <g id="Group-5" transform="translate(0.000000, 586.000000)">
+                <g id="Group-6" transform="translate(192.000000, 986.000000)">
+                    <g id="Stacked-Group" transform="translate(0.000000, 44.000000)">
+                        <g transform="translate(0.000000, 92.000000)" id="Group-23">
+                            <g>
+                                <g>
+                                    <g id="bullet" transform="translate(0.000000, 8.000000)">
+                                        <g id="Oval">
+                                            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                                            <circle stroke="#009FC1" stroke-width="1" stroke-linejoin="square" fill="url(#linearGradient-1)" fill-rule="evenodd" cx="4" cy="4" r="3.5"></circle>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
