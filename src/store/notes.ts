@@ -3,6 +3,6 @@ import { ID } from '@/helpers/strings'
 
 export const state = (): Notes => ({
   uid: ID(),
-  titleNote: '',
+  name: '',
   tasks: []
 })

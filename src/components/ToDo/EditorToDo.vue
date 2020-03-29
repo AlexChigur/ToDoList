@@ -31,6 +31,10 @@ get noteName () {
 set noteName (name) {
   this.$store.dispatch('setNoteName', name)
 }
+
+mounted () {
+  console.log(this.$store.state.notes)
+}
 }
 </script>
 

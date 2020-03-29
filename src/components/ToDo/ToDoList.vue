@@ -42,10 +42,6 @@ export default class TodoList extends Vue {
   addNote () {
     this.showEditorToDo = !this.showEditorToDo
   }
-
-  mounted () {
-    console.log(this.notes)
-  }
 }
 </script>
 
