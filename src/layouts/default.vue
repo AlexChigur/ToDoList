@@ -1,5 +1,6 @@
 <template lang="pug">
-
+  .content
+    nuxt
 </template>
 
 <script>

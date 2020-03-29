@@ -1,11 +1,15 @@
 <template lang="pug">
+  main-page
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-@Component ({})
+import MainPage from '@/components/MainPage.vue'
+@Component({
+  components: { MainPage }
+})
 
-export defualt class index extends Vue {
+export default class index extends Vue {
 
 }
 

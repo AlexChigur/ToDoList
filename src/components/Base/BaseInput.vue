@@ -3,23 +3,24 @@
   .block-input
     .block-input__name(v-if="hasFocus") {{label}}
     input.block-input__data(
-    :class="{'active': hasFocus}"
-    v-model="inputValue"
-    v-bind="{...$attrs}"
-    @focus="hasFocus = true"
-    @blur="hasFocus = false"
+      :class="{'active': hasFocus}"
+      v-model="inputValue"
+      v-bind="{...$attrs}"
+      @focus="hasFocus = true"
+      @blur="hasFocus = false"
     )
 
 </template>
 
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class BlockInput extends Vue {
-  @Prop() label: string
-  @Prop() value: string
+@Prop() label: string
+@Prop() value: string
   hasFocus: boolean = false
+
   get inputValue (): string {
     return this.value
   }
@@ -30,19 +31,12 @@ export default class BlockInput extends Vue {
 </script>
 
 <style lang="sass" scoped>
-  @import '../../../../node_modules/bootstrap/scss/functions'
-  @import '../../../../node_modules/bootstrap/scss/variables'
-  @import '../../../../node_modules/bootstrap/scss/mixins/breakpoints'
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese')
-  $font: Montserrat, Helvetica, sans-serif
 
   ::placeholder
-    color: white
+    color: black
     opacity: 0.2
-    font-family: $font
 
   .block-input
-    font-family: $font
     position: relative
     &__name
       position: absolute
@@ -61,7 +55,7 @@ export default class BlockInput extends Vue {
         color: transparent
       width: 344px
       outline: none
-      color: white
+      color: black
 
   .active
     border-color: #009fc1
