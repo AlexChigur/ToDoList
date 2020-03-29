@@ -1,6 +1,6 @@
 <template lang="pug">
   .todo
-    .todo__title {{ note.titleNote }}
+    .todo__title {{ note.name }}
     .todo__tasks
       task(
         v-for="task in note.tasks"
@@ -25,6 +25,8 @@ export default class ToDo extends Vue {
 <style lang="sass" scoped>
 
 .todo
+  width: 500px
+  height: 500px
   padding-top: 24px
   &__title
     font-weight: 800

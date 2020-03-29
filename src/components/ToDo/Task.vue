@@ -2,7 +2,7 @@
   .task
     .task__checkbox
       base-checkbox
-    .task__description {{ task.taskName }}
+    .task__description {{ task }}
 
 </template>
 

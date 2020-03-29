@@ -9,12 +9,11 @@
     .todo-list__editor(v-if="showEditorToDo")
       editor-to-do(
         :note="notes"
-        :index="index"
         :key="notes.uid"
       )
     .todo-list__catalog
       to-do(
-        v-for="note in mockNotes"
+        v-for="note in notes"
         :note="note"
       )
 
@@ -50,5 +49,7 @@ export default class TodoList extends Vue {
 .todo-list
   &__add-button
     max-width: 256px
+  &__editor
+    max-width: 500px
 
 </style>
