@@ -1,13 +1,17 @@
 <template lang="pug">
   .task
-    .task__checkbox
-      base-checkbox
-    .task__description {{ task }}
+    .task__checkbox(v-if="isEditor")
+      base-checkbox(
+        v-model="selectedTasks"
+        :value="task"
+        :label="task"
+        )
+    .task__description(v-else) {{ task }}
 
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import BaseCheckbox from '@/components/Base/BaseCheckbox.vue'
 import { Tasks } from '@/helpers/NoteTypes'
 
@@ -15,7 +19,16 @@ import { Tasks } from '@/helpers/NoteTypes'
   components: { BaseCheckbox }
 })
 export default class Task extends Vue {
-@Prop({ default: () => ({}) as Tasks }) task: Tasks
+@Prop({}) task
+@Prop({ default: false }) isEditor: boolean
+@Prop({ default: () => ([]) }) tasks
+
+  selectedTasks = []
+
+  @Watch('selectedTasks')
+  handler (task) {
+    console.log(task)
+  }
 }
 </script>
 

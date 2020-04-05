@@ -10,7 +10,7 @@
           v-for="task in noteTask"
           :task="task"
         )
-    .editor-todo__task(v-if="noteName")
+    .editor-todo__task()
       .editor-todo__description-task
         base-input(
           v-model="newTask"
@@ -26,7 +26,7 @@
       base-button(
         text="Add todo"
         accent
-        @clik="addTodo"
+        @click="addTodo"
       )
 </template>
 
@@ -59,11 +59,12 @@ export default class EditorToDo extends Vue {
 
   addTask () {
     this.$store.dispatch('addTask', this.newTask)
+    this.newTask = null
   }
 
   addTodo () {
     this.$store.dispatch('addTodo', this.note)
-    console.log(this.$store.state)
+    this.$store.dispatch('clearNewTask')
   }
 }
 </script>

@@ -1,10 +1,13 @@
 <template lang="pug">
   .todo
     .todo__title {{ note.name }}
+
     .todo__tasks
       task(
         v-for="task in note.tasks"
         :task="task"
+        :tasks="note.tasks"
+        :is-editor="isEditor"
       )
 
 </template>
@@ -18,15 +21,14 @@ import { Notes } from '@/helpers/NoteTypes'
   components: { Task }
 })
 export default class ToDo extends Vue {
-  @Prop({ default: () => ({}) as Notes }) note: Notes
+@Prop({ default: () => ({}) }) note
+@Prop({ default: false }) isEditor: boolean
 }
 </script>
 
 <style lang="sass" scoped>
 
 .todo
-  width: 500px
-  height: 500px
   padding-top: 24px
   &__title
     font-weight: 800

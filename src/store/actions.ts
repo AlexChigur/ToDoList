@@ -10,3 +10,8 @@ export const addTask = ({ commit }, task) => {
 export const addTodo = ({ commit }, todo) => {
   commit('ADD_TODO', todo)
 }
+
+export const clearNewTask = ({ commit }) => {
+  commit('CLEAR_NEW_TASK')
+}
+
