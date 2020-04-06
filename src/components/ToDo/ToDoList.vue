@@ -10,20 +10,26 @@
       editor-to-do(
         :note="newTask"
       )
-    .todo-list__catalog-container
+    .todo-list__catalog-container(v-for="(todo, index) in todos")
       nuxt-link.todo-list__catalog-container__catalog(
-          v-for="todo in todos"
           :to="{name: 'note-noteId', params: { noteId: todo.uid}}"
         )
           .todo-list__catalog-container__catalog__title {{ todo.name }}
           .todo-list__catalog-container__catalog__task(v-for="task in todo.tasks")
             .todo-list__catalog-container__catalog__task__description {{ task }}
-          .delete-button
-            base-button(
-              text-button
-              text="Delete note"
-              @click="deleteNote(todo.uid)"
-            )
+      .todo-list__catalog-container__delete-button
+        base-button(
+          text-button
+          text="Delete note"
+          @click="showTooltip"
+        )
+      .todo-list__catalog-container__tooltip
+        base-tooltip(
+          :index="index"
+          :toolTip="toolTip"
+          @onClick="deleteNote"
+          @hideTooltip="hideTooltip"
+        )
 
 </template>
 
@@ -32,12 +38,14 @@ import { Component, Vue } from 'vue-property-decorator'
 import ToDo from '@/components/ToDo/ToDo.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
 import EditorToDo from '@/components/ToDo/EditorToDo.vue'
+import BaseTooltip from '@/components/Base/BaseTooltip.vue'
 
 @Component({
-  components: { EditorToDo, ToDo, BaseButton }
+  components: { BaseTooltip, EditorToDo, ToDo, BaseButton }
 })
 export default class TodoList extends Vue {
   showEditorToDo: boolean = false
+  toolTip: boolean = false
 
   get newTask () {
     return this.$store.state.newTask
@@ -47,12 +55,20 @@ export default class TodoList extends Vue {
     return this.$store.state.notes.todos
   }
 
+  showTooltip () {
+    this.toolTip = !this.toolTip
+  }
+
+  hideTooltip () {
+    this.toolTip = false
+  }
+
   addNote () {
     this.showEditorToDo = !this.showEditorToDo
   }
 
-  deleteNote (noteId) {
-    this.todos.filter(({ uid }) => uid !== noteId)
+  deleteNote (index) {
+    this.$store.dispatch('deleteTodo', index)
   }
 }
 </script>
@@ -68,13 +84,14 @@ export default class TodoList extends Vue {
   &__catalog-container
     padding-top: 20px
     color: black
-    max-width: 200px
+    max-width: 300px
     &__catalog
       color: black
       &__title
         font-weight: bold
       &__task
         margin-left: 20px
-  .delete-button
-    z-index: 2
+    &__tooltip
+      position: absolute
+
 </style>

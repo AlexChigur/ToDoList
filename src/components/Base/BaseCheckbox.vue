@@ -3,7 +3,7 @@
     input(
       type="checkbox"
       v-model="selectedItems"
-      v-bind:value="value"
+      :value="value"
     )
     .base-checkbox__label {{ label }}
 </template>
@@ -17,6 +17,10 @@ export default class BaseCheckbox extends Vue {
 @Prop() label: string
 
   selectedItems = []
+  @Watch('selectedItems')
+  handler (task) {
+    console.log(task)
+  }
 }
 </script>
 

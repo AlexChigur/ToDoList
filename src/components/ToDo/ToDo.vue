@@ -4,10 +4,9 @@
 
     .todo__tasks
       task(
-        v-for="task in note.tasks"
-        :task="task"
         :tasks="note.tasks"
         :is-editor="isEditor"
+        :uid="note.uid"
       )
 
 </template>

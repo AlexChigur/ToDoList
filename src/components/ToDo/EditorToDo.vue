@@ -10,13 +10,13 @@
           v-for="task in noteTask"
           :task="task"
         )
-    .editor-todo__task()
-      .editor-todo__description-task
+    .editor-todo__task
+      .editor-todo__task__description-task
         base-input(
           v-model="newTask"
           placeholder="Task name"
         )
-      .editor-todo__task__add-button
+      .editor-todo__task__add-task-button
         base-button(
           @click="addTask"
           no-border
@@ -65,6 +65,13 @@ export default class EditorToDo extends Vue {
   addTodo () {
     this.$store.dispatch('addTodo', this.note)
     this.$store.dispatch('clearNewTask')
+    const serialObj = JSON.stringify(this.$store.state.notes.todos)
+    localStorage.setItem('todos', serialObj)
+    console.log(this.$store)
+  }
+
+  mounted () {
+    this.$store.dispatch('loadLocalStorage')
   }
 }
 </script>
@@ -74,7 +81,7 @@ export default class EditorToDo extends Vue {
 .editor-todo
   &__task
     display: flex
-    &__add-button
+    &__add-task-button
       max-width: 156px
   &__edit-todo
     max-width: 200px
