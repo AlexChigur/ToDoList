@@ -10,7 +10,7 @@
           v-for="task in noteTask"
           :task="task"
         )
-    .editor-todo__task
+    .editor-todo__task(v-if="noteName")
       .editor-todo__task__description-task
         base-input(
           v-model="newTask"
@@ -50,7 +50,7 @@ export default class EditorToDo extends Vue {
     return this.note.name
   }
   set noteName (name) {
-    this.$store.dispatch('setNoteName', name)
+    this.$store.dispatch('addNoteName', name)
   }
 
   get noteTask () {
@@ -58,20 +58,19 @@ export default class EditorToDo extends Vue {
   }
 
   addTask () {
-    this.$store.dispatch('addTask', this.newTask)
+    this.$store.dispatch('addTaskToNewNote', this.newTask)
     this.newTask = null
   }
 
   addTodo () {
     this.$store.dispatch('addTodo', this.note)
     this.$store.dispatch('clearNewTask')
-    const serialObj = JSON.stringify(this.$store.state.notes.todos)
-    localStorage.setItem('todos', serialObj)
-    console.log(this.$store)
   }
 
   mounted () {
     this.$store.dispatch('loadLocalStorage')
+    this.$store.dispatch('setHistoryStore')
+    console.log(this.$store.state)
   }
 }
 </script>
@@ -81,11 +80,21 @@ export default class EditorToDo extends Vue {
 .editor-todo
   &__task
     display: flex
+    padding-top: 14px
+    +media-breakpoint-down(sm)
+      flex-wrap: wrap
+
     &__add-task-button
       max-width: 156px
+
   &__edit-todo
     max-width: 200px
     display: flex
     text-align: center
+    padding-top: 14px
+
+  &__name
+    &__task-of-note
+      padding-top: 14px
 
 </style>

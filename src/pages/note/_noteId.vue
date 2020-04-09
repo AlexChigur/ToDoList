@@ -1,7 +1,7 @@
 <template lang="pug">
   to-do(
     :note="note"
-    :is-editor="true"
+    :history-note="historyNote"
   )
 
 </template>
@@ -10,17 +10,22 @@
 import { Component, Vue } from 'vue-property-decorator'
 import ToDo from '@/components/ToDo/ToDo.vue'
 @Component({
-  components: { ToDo },
-  async asyncData ({ params, store }) {
-    const note = store.state.notes.todos
-      .find(({ uid }) => uid === params.noteId)
-
-    return {
-      note
-    }
-  }
+  components: { ToDo }
 })
 export default class noteId extends Vue {
+  get note () {
+    return this.$store.state.notes.todos
+      .find(({ uid }) => uid === this.$route.params.noteId)
+  }
+
+  get historyNote () {
+    return this.$store.state.historyStore.todos
+      .find(({ uid }) => uid === this.$route.params.noteId)
+  }
+
+  mounted () {
+    this.$store.dispatch('loadLocalStorage')
+  }
 }
 
 </script>

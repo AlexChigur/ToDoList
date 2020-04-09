@@ -1,5 +1,4 @@
 <template lang="pug">
-
   .block-input
     .block-input__name(v-if="hasFocus") {{label}}
     input.block-input__data(
@@ -34,7 +33,8 @@ export default class BlockInput extends Vue {
 
   ::placeholder
     color: black
-    opacity: 0.2
+    opacity: 0.5
+    padding-left: 8px
 
   .block-input
     position: relative

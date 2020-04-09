@@ -34,5 +34,6 @@ export default class BaseTooltip extends Vue {
   &__positive-response,
   &__negative-answer
     font-weight: bold
+    cursor: pointer
 
 </style>
