@@ -2,18 +2,18 @@
   .editor-todo
     .editor-todo__name
       base-input(
-        v-model="noteName"
+        v-model="newNoteName"
         placeholder="Note name"
       )
       .editor-todo__name__task-of-note
         task(
-          v-for="task in noteTask"
+          v-for="task in newNoteTasks"
           :task="task"
         )
-    .editor-todo__task(v-if="noteName")
+    .editor-todo__task(v-if="newNoteName")
       .editor-todo__task__description-task
         base-input(
-          v-model="newTask"
+          v-model="newTaskName"
           placeholder="Task name"
         )
       .editor-todo__task__add-task-button
@@ -34,43 +34,42 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import BaseInput from '@/components/Base/BaseInput.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
-import { Notes } from '@/helpers/NoteTypes'
 import Task from '@/components/ToDo/Task.vue'
+import { NewTask } from '@/helpers/types'
 
 @Component({
   components: { Task, BaseButton, BaseInput }
 })
 export default class EditorToDo extends Vue {
-@Prop({ default: () => ({}) as Notes }) note: Notes
+@Prop({ default: () => ({}) as NewTask }) newTask: NewTask
 @Prop({ default: false }) showEditorTodo: boolean
 
-  newTask = null
+  newTaskName = null
 
-  get noteName () {
-    return this.note.name
+  get newNoteName () {
+    return this.newTask.name
   }
-  set noteName (name) {
+  set newNoteName (name) {
     this.$store.dispatch('addNoteName', name)
   }
 
-  get noteTask () {
-    return this.note.tasks
+  get newNoteTasks () {
+    return this.newTask.tasks
   }
 
   addTask () {
-    this.$store.dispatch('addTaskToNewNote', this.newTask)
-    this.newTask = null
+    this.$store.dispatch('addTaskToNewNote', this.newTaskName)
+    this.newTaskName = null
   }
 
   addTodo () {
-    this.$store.dispatch('addTodo', this.note)
+    this.$store.dispatch('addTodo', this.newTask)
     this.$store.dispatch('clearNewTask')
   }
 
   mounted () {
     this.$store.dispatch('loadLocalStorage')
     this.$store.dispatch('setHistoryStore')
-    console.log(this.$store.state)
   }
 }
 </script>

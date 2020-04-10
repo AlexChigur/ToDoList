@@ -9,11 +9,11 @@
             :value="task"
           )
         .task__container__input-block__label(v-if="!isEditorTask") {{task}}
-        .task__checkbox__input-block__edit-input(v-else)
+        .task__container__input-block__edit-input(v-else)
           base-input(
             v-model="changeTask"
           )
-      .task__container__delete-button
+      .task__container__delete-button(v-if="isEditorTask")
         base-button(
           text-button
           text="Delete task"
@@ -22,7 +22,7 @@
       .task__container__edit-task-button
         base-button(
           text-button
-          text="edit task"
+          :text="editorButtonText"
           @click="editor"
         )
     .task__description(v-if="!isEditor") &bull; {{ task }}
@@ -34,12 +34,13 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import BaseCheckbox from '@/components/Base/BaseCheckbox.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
 import BaseInput from '@/components/Base/BaseInput.vue'
+import { Note } from '@/helpers/types'
 
 @Component({
   components: { BaseCheckbox, BaseButton, BaseInput }
 })
 export default class Task extends Vue {
-@Prop({}) task
+@Prop({ default: () => ({}) as Note }) task: Note
 @Prop({ default: () => ([]) }) tasks: []
 @Prop({}) uid: string
 @Prop({}) index: string
@@ -55,12 +56,17 @@ export default class Task extends Vue {
     return this.task
   }
   set changeTask (task) {
-    console.log(this.$store.state)
     this.$store.dispatch('setTask', [task, this.index, this.uid])
   }
 
   removeTask (index) {
     this.$store.dispatch('deleteTask', [this.uid, index])
+  }
+
+  get editorButtonText () {
+    return !this.isEditorTask
+      ? 'edit task'
+      : 'cancel edit'
   }
 }
 </script>
@@ -73,10 +79,22 @@ export default class Task extends Vue {
     display: flex
     justify-content: space-between
     align-items: center
+
     &__input-block
       display: flex
+      align-items: baseline
+      padding-top: 6px
+      &__edit-input
+        padding: 0 0 0 6px
+        /deep/
+          .block-input
+            &__data
+              max-width: 200px
+              height: 24px
+
       &__label
         padding-left: 10px
+
   &__description
     font-size: 14px
     padding: 4px 0 0 16px

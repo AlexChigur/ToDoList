@@ -1,6 +1,7 @@
 import { ID } from '@/helpers/strings'
+import { NewTask } from '@/helpers/types'
 
-export const getDefaultState = () => {
+export const getDefaultState = ():NewTask => {
   return {
     name: '',
     uid: ID(),
@@ -8,4 +9,8 @@ export const getDefaultState = () => {
   }
 }
 
-export const state = getDefaultState()
+export const state = ():NewTask => ({
+  name: '',
+  uid: ID(),
+  tasks: []
+})

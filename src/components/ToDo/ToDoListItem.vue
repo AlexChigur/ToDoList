@@ -27,11 +27,12 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import BaseTooltip from '@/components/Base/BaseTooltip.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
+import { Note } from '@/helpers/types'
 @Component({
   components: { BaseTooltip, BaseButton }
 })
 export default class ToDoListItem extends Vue {
-@Prop({ default: () => ({}) }) todo: {}
+@Prop({ default: () => ({}) as Note }) todo: Note
 @Prop() index: number
   toolTip: boolean = false
 

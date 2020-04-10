@@ -8,7 +8,7 @@
       )
     .todo-list__editor(v-if="showEditorToDo")
       editor-to-do(
-        :note="newTask"
+        :new-task="newTask"
       )
     .todo-list__catalog-container
       to-do-list-item(
@@ -25,6 +25,7 @@ import ToDo from '@/components/ToDo/ToDo.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
 import EditorToDo from '@/components/ToDo/EditorToDo.vue'
 import ToDoListItem from '@/components/ToDo/ToDoListItem.vue'
+import { NewTask, Note } from '@/helpers/types'
 
 @Component({
   components: { ToDoListItem, EditorToDo, ToDo, BaseButton }
@@ -33,11 +34,11 @@ export default class TodoList extends Vue {
   showEditorToDo: boolean = false
   toolTip: boolean = false
 
-  get newTask () {
+  get newTask ():NewTask {
     return this.$store.state.newTask
   }
 
-  get todos () {
+  get todos ():Note {
     return this.$store.state.notes.todos
   }
   addNote () {

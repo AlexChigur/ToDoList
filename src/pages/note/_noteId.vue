@@ -9,16 +9,17 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import ToDo from '@/components/ToDo/ToDo.vue'
+import { Note } from '@/helpers/types'
 @Component({
   components: { ToDo }
 })
 export default class noteId extends Vue {
-  get note () {
+  get note ():Note {
     return this.$store.state.notes.todos
       .find(({ uid }) => uid === this.$route.params.noteId)
   }
 
-  get historyNote () {
+  get historyNote ():Note {
     return this.$store.state.historyStore.todos
       .find(({ uid }) => uid === this.$route.params.noteId)
   }
