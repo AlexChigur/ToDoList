@@ -8,7 +8,12 @@
             v-model="selectedTasks"
             :value="task"
           )
-        .task__container__input-block__label(v-if="!isEditorTask") {{task}}
+        .task__container__input-block__label(
+            v-if="!isEditorTask"
+            :class="{'performed': completeTask}"
+          ) {{task}}
+          .task__container__input-block__label__icon(v-if="completeTask")
+            img(src="@/assets/304167.svg")
         .task__container__input-block__edit-input(v-else)
           base-input(
             v-model="changeTask"
@@ -34,19 +39,18 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import BaseCheckbox from '@/components/Base/BaseCheckbox.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
 import BaseInput from '@/components/Base/BaseInput.vue'
-import { Note } from '@/helpers/types'
 
 @Component({
   components: { BaseCheckbox, BaseButton, BaseInput }
 })
 export default class Task extends Vue {
-@Prop({ default: () => ({}) as Note }) task: Note
+@Prop({}) task: string
 @Prop({ default: () => ([]) }) tasks: []
 @Prop({}) uid: string
 @Prop({}) index: string
 @Prop({ default: false }) isEditor: boolean
-  selectedTasks = []
   isEditorTask: boolean = false
+  selectedTasks = []
 
   editor () {
     this.isEditorTask = !this.isEditorTask
@@ -67,6 +71,10 @@ export default class Task extends Vue {
     return !this.isEditorTask
       ? 'edit task'
       : 'cancel edit'
+  }
+
+  get completeTask (): boolean {
+    return this.selectedTasks.includes(this.task)
   }
 }
 </script>
@@ -94,9 +102,19 @@ export default class Task extends Vue {
 
       &__label
         padding-left: 10px
+        &__icon
+          display: inline
+          padding-left: 15px
+          img
+            width: 15px
+            height: 15px
+            transform: translateY(-4px)
 
   &__description
     font-size: 14px
     padding: 4px 0 0 16px
+
+.performed
+  text-decoration: line-through
 
 </style>

@@ -13,6 +13,9 @@ import BaseButton from '@/components/Base/BaseButton.vue'
   components: { BaseButton, ToDoList }
 })
 export default class MainPage extends Vue {
+  mounted () {
+    console.log(this.$store.state)
+  }
 }
 </script>
 

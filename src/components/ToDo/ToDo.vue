@@ -12,16 +12,26 @@
         base-input(
           v-model="titleName"
         )
-      base-button(
-        @click="cancelChange"
-        text-button
-        text="cancel change"
-      )
-      base-button(
-        @click="editor"
-        text-button
-        text="cancel edit"
-      )
+      .todo__editor-title__cancel-change
+        base-button(
+          @click="cancelChange"
+          text-button
+          text="cancel change"
+        )
+      .todo__editor-title__cancel-edit
+        base-button(
+          @click="showToolTipEditName"
+          text-button
+          text="cancel edit"
+        )
+        .todo__editor-title__cancel-edit__tooltip
+          transition(name="slide-fade")
+            base-tooltip(
+              @onClick="editor"
+              @hideTooltip="hideTooltip"
+              :toolTip="toolTipNoteName"
+              text="Are you sure?"
+            )
     .todo__tasks
       task(
         v-for="(task, index) in note.tasks"
@@ -59,7 +69,7 @@
             base-tooltip(
               @onClick="deleteNote"
               @hideTooltip="hideTooltip"
-              :toolTip="toolTip"
+              :toolTip="toolTipDeleteNote"
             )
 
 </template>
@@ -77,17 +87,23 @@ import BaseTooltip from '@/components/Base/BaseTooltip.vue'
 })
 export default class ToDo extends Vue {
 @Prop({ default: () => ({}) as Note }) note: Note
-  @Prop({ default: () => ({}) }) historyNote
+@Prop({ default: () => ({}) as Note }) historyNote: Note
   isEditor: boolean = false
   newTask = null
-  toolTip: boolean = false
+  toolTipDeleteNote: boolean = false
+  toolTipNoteName: boolean = false
 
   hideTooltip () {
-    this.toolTip = false
+    this.toolTipDeleteNote = false
+    this.toolTipNoteName = false
   }
 
   showTooltip () {
-    this.toolTip = !this.toolTip
+    this.toolTipDeleteNote = !this.toolTipDeleteNote
+  }
+
+  showToolTipEditName () {
+    this.toolTipNoteName = !this.toolTipNoteName
   }
 
   get notes () {
@@ -103,6 +119,7 @@ export default class ToDo extends Vue {
 
   saveChange () {
     this.$store.dispatch('setNote', this.note)
+    this.$router.replace('/')
   }
 
   cancelChange () {
@@ -121,7 +138,7 @@ export default class ToDo extends Vue {
   deleteNote () {
     const noteIndex = this.notes.findIndex(this.currentNoteIndex)
     this.$store.dispatch('deleteTodo', noteIndex)
-    this.$router.push('/')
+    this.$router.replace('/')
   }
 
   currentNoteIndex (element) {

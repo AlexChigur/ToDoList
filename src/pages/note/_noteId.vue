@@ -20,12 +20,13 @@ export default class noteId extends Vue {
   }
 
   get historyNote ():Note {
-    return this.$store.state.historyStore.todos
+    return this.$store.state.historyStore.historyTodos
       .find(({ uid }) => uid === this.$route.params.noteId)
   }
 
   mounted () {
     this.$store.dispatch('loadLocalStorage')
+    console.log(this.$store.state)
   }
 }
 

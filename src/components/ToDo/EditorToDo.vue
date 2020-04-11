@@ -69,7 +69,6 @@ export default class EditorToDo extends Vue {
 
   mounted () {
     this.$store.dispatch('loadLocalStorage')
-    this.$store.dispatch('setHistoryStore')
   }
 }
 </script>

@@ -57,18 +57,15 @@ export const DELETE_TASK = (state, task) => {
 
 export const SET_LOCAL_STORAGE = (state) => {
   const toJSONNoteState = JSON.stringify(state.notes.todos)
-  const toJSONHistoryState = JSON.stringify(state.notes.todos)
   localStorage.setItem('todos', toJSONNoteState)
-  localStorage.setItem('todos', toJSONHistoryState)
 }
 
 export const LOAD_LOCAL_STORAGE = (state) => {
   const ObjNoteState = JSON.parse(localStorage.getItem('todos'))
-  const ObjHistoryState = JSON.parse(localStorage.getItem('todos'))
   Vue.set(state.notes, 'todos', ObjNoteState)
-  Vue.set(state.historyStore, 'todos', ObjHistoryState)
+  Vue.set(state.historyStore, 'historyTodos', ObjNoteState)
 }
 
 export const SET_HISTORY_STORE = (state) => {
-  Vue.set(state.historyStore, 'todos', state.notes.todos)
+  Vue.set(state.historyStore, 'historyTodos', state.notes.todos)
 }
