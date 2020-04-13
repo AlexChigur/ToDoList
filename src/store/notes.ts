@@ -1,3 +1,4 @@
 export const state = () => ({
-  todos: []
+  todos: [],
+  selectedTasks: []
 })

@@ -26,7 +26,6 @@ export default class noteId extends Vue {
 
   mounted () {
     this.$store.dispatch('loadLocalStorage')
-    console.log(this.$store.state)
   }
 }
 

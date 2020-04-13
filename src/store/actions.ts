@@ -7,6 +7,10 @@ export const setNoteName = ({ commit }, note) => {
   commit('SET_NOTE_NAME', note)
 }
 
+export const setHistoryNoteName = ({ commit }, note) => {
+  commit('SET_HISTORY_NOTE_NAME', note)
+}
+
 export const addNoteName = ({ commit }, name) => {
   commit('ADD_NOTE_NAME', name)
 }
@@ -51,3 +55,4 @@ export const loadLocalStorage = ({ commit }) => {
 export const setHistoryStore = ({ commit }) => {
   commit('SET_HISTORY_STORE')
 }
+

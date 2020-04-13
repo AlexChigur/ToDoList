@@ -70,11 +70,16 @@ export default class Task extends Vue {
   get editorButtonText () {
     return !this.isEditorTask
       ? 'edit task'
-      : 'cancel edit'
+      : 'save change'
   }
 
   get completeTask (): boolean {
     return this.selectedTasks.includes(this.task)
+  }
+  @Watch('selectedTasks')
+  handler () {
+    localStorage.setItem('selectedTasks', JSON.stringify(this.selectedTasks))
+    console.log(localStorage.selectedTasks)
   }
 }
 </script>
@@ -87,6 +92,15 @@ export default class Task extends Vue {
     display: flex
     justify-content: space-between
     align-items: center
+    +media-breakpoint-down(sm)
+      flex-direction: column
+      align-items: flex-start
+
+    &__edit-task-button
+      /deep/
+        .text
+          +media-breakpoint-down(xs)
+            font-size: 14px
 
     &__input-block
       display: flex

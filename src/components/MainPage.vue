@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import ToDoList from '@/components/ToDo/ToDoList.vue'
 import BaseButton from '@/components/Base/BaseButton.vue'
 
@@ -13,9 +13,6 @@ import BaseButton from '@/components/Base/BaseButton.vue'
   components: { BaseButton, ToDoList }
 })
 export default class MainPage extends Vue {
-  mounted () {
-    console.log(this.$store.state)
-  }
 }
 </script>
 

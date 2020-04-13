@@ -1,7 +1,7 @@
 <template lang="pug">
   .todo
     .todo__title(v-if="!isEditor") {{ note.name }}
-      .todo____title__edit-title
+      .todo__title__edit-title
         base-button(
           @click="editor"
           text-button
@@ -18,6 +18,14 @@
           text-button
           text="cancel change"
         )
+        .todo__editor-title__cancel-change__repeat-change(
+          v-if="hasRepeatChangeButton"
+        )
+          base-button(
+            @click="repeatChange"
+            text-button
+            text="repeat change"
+          )
       .todo__editor-title__cancel-edit
         base-button(
           @click="showToolTipEditName"
@@ -27,9 +35,9 @@
         .todo__editor-title__cancel-edit__tooltip
           transition(name="slide-fade")
             base-tooltip(
-              @onClick="editor"
+              @onClick="cancelNoteNameEdit"
               @hideTooltip="hideTooltip"
-              :toolTip="toolTipNoteName"
+              :toolTip="hasToolTipNoteName"
               text="Are you sure?"
             )
     .todo__tasks
@@ -69,7 +77,7 @@
             base-tooltip(
               @onClick="deleteNote"
               @hideTooltip="hideTooltip"
-              :toolTip="toolTipDeleteNote"
+              :toolTip="hasToolTipDeleteNote"
             )
 
 </template>
@@ -90,20 +98,21 @@ export default class ToDo extends Vue {
 @Prop({ default: () => ({}) as Note }) historyNote: Note
   isEditor: boolean = false
   newTask = null
-  toolTipDeleteNote: boolean = false
-  toolTipNoteName: boolean = false
+  hasToolTipDeleteNote: boolean = false
+  hasToolTipNoteName: boolean = false
+  hasRepeatChangeButton: boolean = false
 
   hideTooltip () {
-    this.toolTipDeleteNote = false
-    this.toolTipNoteName = false
+    this.hasToolTipDeleteNote = false
+    this.hasToolTipNoteName = false
   }
 
   showTooltip () {
-    this.toolTipDeleteNote = !this.toolTipDeleteNote
+    this.hasToolTipDeleteNote = !this.hasToolTipDeleteNote
   }
 
   showToolTipEditName () {
-    this.toolTipNoteName = !this.toolTipNoteName
+    this.hasToolTipNoteName = !this.hasToolTipNoteName
   }
 
   get notes () {
@@ -115,6 +124,7 @@ export default class ToDo extends Vue {
   }
   set titleName (name) {
     this.$store.dispatch('setNoteName', [name, this.note.uid])
+    this.$store.dispatch('setHistoryNoteName', [name, this.note.uid])
   }
 
   saveChange () {
@@ -123,11 +133,25 @@ export default class ToDo extends Vue {
   }
 
   cancelChange () {
-    this.$store.dispatch('setNoteName', [this.historyNote.name, this.note.uid])
+    this.hasRepeatChangeButton = true
+    const localStorageNote = JSON.parse(localStorage.getItem('todos'))
+      .find(({ uid }) => uid === this.note.uid)
+    this.$store.dispatch('setNoteName', [localStorageNote.name, this.note.uid])
+  }
+
+  repeatChange () {
+    this.hasRepeatChangeButton = false
+    this.$store.dispatch('setNoteName', [this.historyNote.name, this.historyNote.uid])
   }
 
   editor () {
     this.isEditor = !this.isEditor
+  }
+
+  cancelNoteNameEdit () {
+    this.isEditor = !this.isEditor
+    this.hasToolTipNoteName = false
+    this.cancelChange()
   }
 
   addTask () {
@@ -159,6 +183,12 @@ export default class ToDo extends Vue {
     align-items: center
     max-width: 680px
 
+    &__edit-title
+      /deep/
+        .text
+          +media-breakpoint-down(xs)
+            font-size: 14px
+
   &__tasks
     max-width: 665px
     margin-left: 14px
@@ -167,19 +197,49 @@ export default class ToDo extends Vue {
     margin: 14px 0 0 14px
     display: flex
     align-items: center
+    +media-breakpoint-down(sm)
+      flex-direction: column
+      align-items: flex-start
+
+    &__add-task-button
+      /deep/
+        .text
+          +media-breakpoint-down(xs)
+            font-size: 14px
 
   &__editor-title
     display: flex
+    +media-breakpoint-down(sm)
+      flex-direction: column
+      max-width: 300px
+
     &__input
       /deep/
         .block-input
           &__data
-            max-width: 300px
+            width: 300px
+
+    &__cancel-change,
+    &__cancel-edit
+      /deep/
+        .text
+          +media-breakpoint-down(sm)
+            font-size: 14px
+
   &__buttons
     max-width: 665px
     padding-top: 54px
     display: flex
     justify-content: flex-start
+    +media-breakpoint-down(sm)
+      flex-direction: column
+
+    &__save-change,
+    &__delete-note
+      /deep/
+        .text
+          +media-breakpoint-down(sm)
+            font-size: 14px
 
   .slide-fade-enter-active
     transition: all .3s ease
